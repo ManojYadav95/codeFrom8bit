@@ -1,0 +1,30 @@
+services:
+  springbootapp:
+   image: springboot
+   restart: always
+   build: .
+   ports:
+     - 8081:8080
+   environment:
+     MYSQL_HOST: mysqldb
+     MYSQL_USER: root
+     MYSQL_PASSWORD: root
+     MYSQL_PORT: 3306     
+#     - spring.datasource.url=jdbc:mysql://mysqldb:3306/user_work
+#     - spring.jpa.show-sql=true
+#     - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#     - spring.datasource.username=root
+#     - spring.datasource.password=root
+#     - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+#     - spring.jpa.hibernate.ddl-auto=update     
+
+  mysqldb:
+   container_name: mysqldb
+   image: mysql
+   volumes:
+     - ./data:/var/lib/mysql
+   ports:
+     - 3307:3306
+   environment:
+     MYSQL_DATABASE: test
+     MYSQL_ROOT_PASSWORD: root
